@@ -27,7 +27,7 @@ public class BookServiceImplTest {
         // then
         assertNotNull(allBooks);
         assertFalse(allBooks.isEmpty());
-        assertEquals(6, allBooks.size());
+        assertEquals(7, allBooks.size());
     }
 
     @Test
@@ -52,4 +52,19 @@ public class BookServiceImplTest {
         // then
         fail("test should throw BookNotNullIdException");
     }
+    
+    /**
+     * author: MATSUS
+     */
+    @Test
+    public void testShouldHaveNotNullIdException() {
+    	// given
+    	final BookTo bookToSave = new BookTo();
+    	bookToSave.setId(null);
+    	// when
+    	bookService.saveBook(bookToSave);
+       	// then
+    	assertTrue(bookToSave.getId()!=null);
+    }
+    
 }

@@ -13,6 +13,7 @@ import pl.spring.demo.service.impl.BookServiceImpl;
 import pl.spring.demo.to.BookTo;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * TODO The class BookServiceImplTest is supposed to be documented...
@@ -42,4 +43,5 @@ public class BookServiceImplTest {
         Mockito.verify(bookDao).save(book);
         assertEquals(1L, result.getId().longValue());
     }
+
 }

@@ -1,38 +1,55 @@
 package pl.spring.demo.aop;
 
+import java.lang.reflect.Method;
+import java.util.Collection;
 
 import org.springframework.aop.MethodBeforeAdvice;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pl.spring.demo.annotation.NullableId;
+import pl.spring.demo.common.Sequence;
+import pl.spring.demo.dao.BookDao;
 import pl.spring.demo.exception.BookNotNullIdException;
+import pl.spring.demo.to.BookTo;
 import pl.spring.demo.to.IdAware;
-
-import java.lang.reflect.Method;
 
 @Service("bookDaoAdvisor")
 public class BookDaoAdvisor implements MethodBeforeAdvice {
 
-    @Override
-    public void before(Method method, Object[] objects, Object o) throws Throwable {
+	@Autowired
+	private Sequence sequence;
 
-        if (hasAnnotation(method, o, NullableId.class)) {
-            checkNotNullId(objects[0]);
-        }
-    }
+	@Override
+	public void before(Method method, Object[] objects, Object o) throws Throwable {
+		if (hasAnnotation(method, o, NullableId.class)) {
+			// not null - throws exception, null - pass and set new id
+			checkNotNullId(objects[0]);
+			// bookDao.findAll()
+			Collection<? extends IdAware> existingIds = (Collection<? extends IdAware>) BookDao.class
+					.getMethod("findAll").invoke(o);
+			// sequence.nextValue(..)
+			Long id = sequence.nextValue(existingIds);
+			// book.setId(..)
+			BookTo.class.getMethod("setId", Long.class).invoke(objects[0], id);
+			// ((BookTo) objects[0]).setId(sequence.nextValue(((BookDaoImpl)
+			// o).findAll()));
+		}
+	}
 
-    private void checkNotNullId(Object o) {
-        if (o instanceof IdAware && ((IdAware) o).getId() != null) {
-            throw new BookNotNullIdException();
-        }
-    }
+	private void checkNotNullId(Object o) {
+		if (o instanceof IdAware && ((IdAware) o).getId() != null) {
+			throw new BookNotNullIdException();
+		}
+	}
 
-    private boolean hasAnnotation (Method method, Object o, Class annotationClazz) throws NoSuchMethodException {
-        boolean hasAnnotation = method.getAnnotation(annotationClazz) != null;
+	private boolean hasAnnotation(Method method, Object o, Class annotationClazz) throws NoSuchMethodException {
+		boolean hasAnnotation = method.getAnnotation(annotationClazz) != null;
 
-        if (!hasAnnotation && o != null) {
-            hasAnnotation = o.getClass().getMethod(method.getName(), method.getParameterTypes()).getAnnotation(annotationClazz) != null;
-        }
-        return hasAnnotation;
-    }
+		if (!hasAnnotation && o != null) {
+			hasAnnotation = o.getClass().getMethod(method.getName(), method.getParameterTypes())
+					.getAnnotation(annotationClazz) != null;
+		}
+		return hasAnnotation;
+	}
 }
