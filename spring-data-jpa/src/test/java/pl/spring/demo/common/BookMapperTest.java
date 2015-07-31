@@ -47,7 +47,7 @@ public class BookMapperTest {
 	public void testShouldConvertBookEntityToBookTo(){
 		// given
 		BookEntity bookEntity = new BookEntity(10L,"title",null);
-		bookEntity.setAuthors(bookEntity.getTestAuthorsTo());
+		bookEntity.setAuthors(BookEntity.getTestAuthorsTo());
 		// when
 		BookTo bookTo = bookMapper.mapToBookTo(bookEntity);
 		// then
@@ -62,7 +62,7 @@ public class BookMapperTest {
 		BookTo bookTo = new BookTo(10L,"title","John Doe, Jan Nowak, Marian Kowalski");
 		// when
 		BookEntity bookEntity = bookMapper.mapToBookEntity(bookTo);
-		List<AuthorTo> expected = bookEntity.getTestAuthorsTo();
+		List<AuthorTo> expected = BookEntity.getTestAuthorsTo();
 		List<AuthorTo> result = bookEntity.getAuthors();
 		System.out.println(expected);
 		// then

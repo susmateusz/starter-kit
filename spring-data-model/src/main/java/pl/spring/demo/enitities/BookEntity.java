@@ -45,11 +45,14 @@ public class BookEntity implements IdAware {
 	        this.authors = authors;
 	    }
 
-	    public List<AuthorTo> getTestAuthorsTo(){
+	    public static List<AuthorTo> getTestAuthorsTo(){
 	    	List<AuthorTo> testAuthors = new ArrayList<>();
-	    	testAuthors.add(new AuthorTo(1L, "John", "Doe"));
-	    	testAuthors.add(new AuthorTo(2L, "Jan", "Nowak"));
-	    	testAuthors.add(new AuthorTo(3L, "Marian", "Kowalski"));
+	    	testAuthors.add(new AuthorTo(1L, "Wiliam", "Szekspir"));
+	    	testAuthors.add(new AuthorTo(2L, "Hanna", "Ożogowska"));
+	    	testAuthors.add(new AuthorTo(3L, "Jan", "Parandowski"));
+	    	testAuthors.add(new AuthorTo(4L, "Edmund", "Niziurski"));
+	    	testAuthors.add(new AuthorTo(4L, "Zbigniew", "Nienacki"));
+	    	testAuthors.add(new AuthorTo(5L, "Aleksander", "Fredro"));
 	    	return testAuthors;
 	    }
 
