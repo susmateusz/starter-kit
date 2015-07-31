@@ -1,5 +1,6 @@
 package pl.spring.demo.enitities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pl.spring.demo.to.AuthorTo;
@@ -44,4 +45,18 @@ public class BookEntity implements IdAware {
 	        this.authors = authors;
 	    }
 
+	    public List<AuthorTo> getTestAuthorsTo(){
+	    	List<AuthorTo> testAuthors = new ArrayList<>();
+	    	testAuthors.add(new AuthorTo(1L, "John", "Doe"));
+	    	testAuthors.add(new AuthorTo(2L, "Jan", "Nowak"));
+	    	testAuthors.add(new AuthorTo(3L, "Marian", "Kowalski"));
+	    	return testAuthors;
+	    }
+
+		@Override
+		public String toString() {
+			return "BookEntity [id=" + id + ", title=" + title + ", authors=" + authors + "]";
+		}
+	    
+	    
 }

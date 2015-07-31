@@ -38,4 +38,11 @@ public class BookTo implements IdAware {
     public void setAuthors(String authors) {
         this.authors = authors;
     }
+
+	@Override
+	public String toString() {
+		return "BookTo [id=" + id + ", title=" + title + ", authors=" + authors + "]";
+	}
+    
+    
 }

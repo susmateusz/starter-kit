@@ -25,15 +25,7 @@ public class BookDaoAdvisor implements MethodBeforeAdvice {
 		if (hasAnnotation(method, o, NullableId.class)) {
 			// not null - throws exception, null - pass and set new id
 			checkNotNullId(objects[0]);
-			// bookDao.findAll()
-			Collection<? extends IdAware> existingIds = (Collection<? extends IdAware>) BookDao.class
-					.getMethod("findAll").invoke(o);
-			// sequence.nextValue(..)
-			Long id = sequence.nextValue(existingIds);
-			// book.setId(..)
-			BookTo.class.getMethod("setId", Long.class).invoke(objects[0], id);
-			// ((BookTo) objects[0]).setId(sequence.nextValue(((BookDaoImpl)
-			// o).findAll()));
+			((BookTo) objects[0]).setId(sequence.nextValue(((BookDao) o).findAll()));
 		}
 	}
 

@@ -5,7 +5,6 @@ public class AuthorTo implements IdAware {
 	private String firstName;
 	private String lastName;
 
-	
 	public AuthorTo() {
 	}
 
@@ -39,6 +38,20 @@ public class AuthorTo implements IdAware {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "" + id + " " + firstName + " " + lastName;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof AuthorTo))
+			return false;
+		AuthorTo other = (AuthorTo) obj;
+		return this.getId().equals(other.getId()) && this.getFirstName().equals(other.getFirstName())
+				&& this.getLastName().equals(other.getLastName());
 	}
 
 }
