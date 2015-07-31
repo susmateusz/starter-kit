@@ -1,7 +1,9 @@
-package pl.spring.demo.mapper;
+package pl.spring.demo.common;
 
 import java.util.Arrays;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.stereotype.Component;
 
@@ -31,10 +33,10 @@ public class BookMapper {
 			bookEntity = new BookEntity();
 			bookEntity.setId(bookTo.getId());
 			bookEntity.setTitle(bookTo.getTitle());
-			Arrays.stream(bookTo.getAuthors().split(", ")).map(s -> s.split(" "))..forEach(System.out::println);
-//			bookEntity.setAuthors(Arrays.stream(bookTo.getAuthors().split(", "))
-//					.map(i -> new AuthorTo(Long.parseLong(i.split(" ")[0]), i.split(" ")[1], i.split(" ")[2]))
-//					.collect(Collectors.toList()));
+			Function<String, String[]> splitter = s -> s.split(" ");
+			Function<String, AuthorTo> authorToParse = splitter.andThen(i -> new AuthorTo(null, i[0], i[1]));
+			bookEntity.setAuthors(
+					Arrays.stream(bookTo.getAuthors().split(", ")).map(authorToParse).collect(Collectors.toList()));
 		}
 		return bookEntity;
 	}

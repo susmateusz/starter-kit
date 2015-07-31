@@ -17,7 +17,7 @@ public class AuthorTo implements IdAware {
 
 	@Override
 	public Long getId() {
-		return null;
+		return id;
 	}
 
 	public String getFirstName() {
@@ -42,7 +42,7 @@ public class AuthorTo implements IdAware {
 
 	@Override
 	public String toString() {
-		return "" + id + " " + firstName + " " + lastName;
+		return firstName + " " + lastName;
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class AuthorTo implements IdAware {
 		if (!(obj instanceof AuthorTo))
 			return false;
 		AuthorTo other = (AuthorTo) obj;
-		return this.getId().equals(other.getId()) && this.getFirstName().equals(other.getFirstName())
+		return this.getFirstName().equals(other.getFirstName())
 				&& this.getLastName().equals(other.getLastName());
 	}
 
