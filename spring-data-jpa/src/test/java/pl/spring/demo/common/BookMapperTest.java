@@ -1,27 +1,27 @@
 package pl.spring.demo.common;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import pl.spring.demo.common.BookMapper;
 import pl.spring.demo.enitities.BookEntity;
 import pl.spring.demo.to.AuthorTo;
 import pl.spring.demo.to.BookTo;
 
 public class BookMapperTest {
 
-	private BookMapper bookMapper = new BookMapper();
+	private BookMapper bookMapper;
+	
+	@Before
+	public void setUp(){
+		bookMapper = new BookMapper();
+	}
 
 	@Test
 	public void testShouldReturnNullWhenNullBookEntity() {
@@ -53,18 +53,32 @@ public class BookMapperTest {
 		// then
 		assertEquals(bookEntity.getId(),bookTo.getId());
 		assertEquals(bookEntity.getTitle(), bookTo.getTitle());
-		assertEquals("John Doe, Jan Nowak, Marian Kowalski", bookTo.getAuthors());
+		assertEquals("Wiliam Szekspir, Hanna Ożogowska, Jan Parandowski, Edmund Niziurski, Zbigniew Nienacki, Aleksander Fredro", bookTo.getAuthors());
+
 	}
 	
 	@Test
 	public void testShouldConvertBookToToBookEntity(){
 		// given
-		BookTo bookTo = new BookTo(10L,"title","John Doe, Jan Nowak, Marian Kowalski");
+		BookTo bookTo = new BookTo(10L,"title","Wiliam Szekspir, Hanna Ożogowska, Jan Parandowski, Edmund Niziurski, Zbigniew Nienacki, Aleksander Fredro");
 		// when
 		BookEntity bookEntity = bookMapper.mapToBookEntity(bookTo);
 		List<AuthorTo> expected = BookEntity.getTestAuthorsTo();
 		List<AuthorTo> result = bookEntity.getAuthors();
-		System.out.println(expected);
+		// then
+		assertEquals(bookTo.getId(),bookEntity.getId());
+		assertEquals(bookTo.getTitle(), bookEntity.getTitle());
+		assertThat(result, is(expected));
+	}
+	
+	@Test
+	public void testShouldConvertBookToToBookEntityWhenIdNull(){
+		// given
+		BookTo bookTo = new BookTo(null,"title","Wiliam Szekspir, Hanna Ożogowska, Jan Parandowski, Edmund Niziurski, Zbigniew Nienacki, Aleksander Fredro");
+		// when
+		BookEntity bookEntity = bookMapper.mapToBookEntity(bookTo);
+		List<AuthorTo> expected = BookEntity.getTestAuthorsTo();
+		List<AuthorTo> result = bookEntity.getAuthors();
 		// then
 		assertEquals(bookTo.getId(),bookEntity.getId());
 		assertEquals(bookTo.getTitle(), bookEntity.getTitle());
