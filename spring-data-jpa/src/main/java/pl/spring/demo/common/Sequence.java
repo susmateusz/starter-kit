@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component("sequence")
 public class Sequence {
-
+	
     public long nextValue(Collection<? extends IdAware> existingIds) {
         long result = 1;
         for (IdAware nextExistingId : existingIds) {
@@ -16,6 +16,6 @@ public class Sequence {
                 result = nextExistingId.getId();
             }
         }
-        return result;
+        return result+1;
     }
 }
