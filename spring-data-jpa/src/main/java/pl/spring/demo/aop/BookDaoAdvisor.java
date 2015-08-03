@@ -1,7 +1,6 @@
 package pl.spring.demo.aop;
 
 import java.lang.reflect.Method;
-import java.util.Collection;
 
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 import pl.spring.demo.annotation.NullableId;
 import pl.spring.demo.common.Sequence;
 import pl.spring.demo.dao.BookDao;
+import pl.spring.demo.enitities.BookEntity;
 import pl.spring.demo.exception.BookNotNullIdException;
 import pl.spring.demo.to.BookTo;
 import pl.spring.demo.to.IdAware;
@@ -25,15 +25,7 @@ public class BookDaoAdvisor implements MethodBeforeAdvice {
 		if (hasAnnotation(method, o, NullableId.class)) {
 			// not null - throws exception, null - pass and set new id
 			checkNotNullId(objects[0]);
-			// bookDao.findAll()
-			Collection<? extends IdAware> existingIds = (Collection<? extends IdAware>) BookDao.class
-					.getMethod("findAll").invoke(o);
-			// sequence.nextValue(..)
-			Long id = sequence.nextValue(existingIds);
-			// book.setId(..)
-			BookTo.class.getMethod("setId", Long.class).invoke(objects[0], id);
-			// ((BookTo) objects[0]).setId(sequence.nextValue(((BookDaoImpl)
-			// o).findAll()));
+			setId(objects[0],o);
 		}
 	}
 
@@ -41,6 +33,11 @@ public class BookDaoAdvisor implements MethodBeforeAdvice {
 		if (o instanceof IdAware && ((IdAware) o).getId() != null) {
 			throw new BookNotNullIdException();
 		}
+	}
+	
+	private void setId(Object book,Object bookDao){
+		if (book instanceof BookEntity && bookDao instanceof BookDao)
+			((BookEntity) book).setId(sequence.nextValue(((BookDao) bookDao).findAll()));
 	}
 
 	private boolean hasAnnotation(Method method, Object o, Class annotationClazz) throws NoSuchMethodException {
