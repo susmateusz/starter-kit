@@ -47,17 +47,6 @@ public class BookServiceImplTest {
     }
     
     @Test
-    public void testShouldFindAllBooksByAuthor() {
-    	// given
-    	final String author = "";
-    	// when
-    	List<BookTo> booksByAuthor = bookService.findBooksByAuthor(author);
-    	// then
-    	assertNotNull(booksByAuthor);
-    	assertFalse(booksByAuthor.isEmpty());
-    }
-    
-    @Test
     public void testShouldFindBookByTitle() {
     	// given
     	final String title = "Opium";
@@ -66,6 +55,17 @@ public class BookServiceImplTest {
     	// then
     	assertNotNull(booksByTitle);
     	assertFalse(booksByTitle.isEmpty());
+    }
+    
+    @Test
+    public void testShouldFindAllBooksByAuthor() {
+    	// given
+    	final String author = "";
+    	// when
+    	List<BookTo> booksByAuthor = bookService.findBooksByAuthor(author);
+    	// then
+    	assertNotNull(booksByAuthor);
+    	assertFalse(booksByAuthor.isEmpty());
     }
     
     @Test
@@ -116,7 +116,7 @@ public class BookServiceImplTest {
      * author: MATSUS
      */
     @Test
-    public void testShouldHaveNotNullIdException() {
+    public void testBookShouldHaveNotNullIdException() {
     	// given
     	final BookTo bookToSave = new BookTo();
     	bookToSave.setId(null);

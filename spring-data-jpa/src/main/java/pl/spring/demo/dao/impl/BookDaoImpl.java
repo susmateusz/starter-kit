@@ -24,9 +24,6 @@ public class BookDaoImpl implements BookDao {
 
 	@Autowired
 	private Sequence sequence;
-	
-	@Autowired
-	private BookMapper bookMapper;
 
 	public BookDaoImpl() {
 		addTestBooks();
