@@ -1,9 +1,9 @@
 package pl.spring.demo.common;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.stereotype.Component;
 
@@ -20,8 +20,9 @@ public class BookMapper {
 			bookTo = new BookTo();
 			bookTo.setId(bookEntity.getId());
 			bookTo.setTitle(bookEntity.getTitle());
-			bookTo.setAuthors(
-					bookEntity.getAuthors().stream().map(AuthorTo::toString).collect(Collectors.joining(", ")));
+			if (bookEntity.getAuthors() != null)
+				bookTo.setAuthors(
+						bookEntity.getAuthors().stream().map(AuthorTo::toString).collect(Collectors.joining(", ")));
 		}
 		return bookTo;
 
@@ -33,11 +34,15 @@ public class BookMapper {
 			bookEntity = new BookEntity();
 			bookEntity.setId(bookTo.getId());
 			bookEntity.setTitle(bookTo.getTitle());
-			Function<String, String[]> splitter = s -> s.split(" ");
-			Function<String, AuthorTo> authorToParse = splitter.andThen(i -> new AuthorTo(null, i[0], i[1]));
-			bookEntity.setAuthors(
-					Arrays.stream(bookTo.getAuthors().split(", ")).map(authorToParse).collect(Collectors.toList()));
+			if (bookTo.getAuthors() != null)
+				bookEntity.setAuthors(mapToAuthorTo(bookTo.getAuthors()));
 		}
 		return bookEntity;
+	}
+
+	public List<AuthorTo> mapToAuthorTo(String author){
+		Function<String, String[]> splitter = s -> s.split(" ");
+		Function<String, AuthorTo> authorToParse = splitter.andThen(i -> new AuthorTo(null, i[0], i[1]));
+		return Arrays.stream(author.split(", ")).map(authorToParse).collect(Collectors.toList());
 	}
 }
