@@ -133,18 +133,15 @@ public class BookDaoImplTest {
 		fail("test should throw BookNotNullIdException");
 	}
 
-	@Test(expected = BookNotNullIdException.class)
+	@Test
 	public void testBookShouldHaveNotNullIdException() {
 		// given
 		final BookEntity bookToSave = new BookEntity();
 		bookToSave.setId(null);
 		// when
-		System.out.println(bookToSave);
 		BookEntity result = bookDao.save(bookToSave);
-		System.out.println(result);
 		// then
 		assertNotNull(result);
 		assertNotNull(result.getId());
-		assertEquals(new Long(99L), result.getId());
 	}
 }

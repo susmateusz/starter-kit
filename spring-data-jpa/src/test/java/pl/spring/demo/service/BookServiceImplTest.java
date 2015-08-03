@@ -123,7 +123,7 @@ public class BookServiceImplTest {
     	// when
     	BookTo result = bookService.saveBook(bookToSave);
        	// then
-    	assertTrue(result.getId()!=null);
+    	assertNotNull(result.getId());
     }
     
 }
