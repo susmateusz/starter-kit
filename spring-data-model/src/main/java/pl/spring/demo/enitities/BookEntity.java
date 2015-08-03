@@ -9,7 +9,7 @@ import pl.spring.demo.to.IdAware;
 public class BookEntity implements IdAware {
 	 private Long id;
 	    private String title;
-	    private List<AuthorTo> authors;
+	    private List<AuthorTo> authors = new ArrayList<>();
 
 	    public BookEntity() {
 		}
