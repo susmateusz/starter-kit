@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import pl.spring.demo.common.BookMapper;
 import pl.spring.demo.dao.BookDao;
+import pl.spring.demo.enitities.BookEntity;
 import pl.spring.demo.service.BookService;
 import pl.spring.demo.to.BookTo;
 
@@ -36,7 +37,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookTo saveBook(BookTo book) {
-        return bookMapper.mapToBookTo(bookDao.save(bookMapper.mapToBookEntity(book)));
+    	BookEntity bookEntity = bookMapper.mapToBookEntity(book);
+    	book = bookMapper.mapToBookTo(bookDao.save(bookEntity));
+    	return book;
     }
 
     public void setBookDao(BookDao bookDao) {
