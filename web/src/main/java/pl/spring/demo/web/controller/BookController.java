@@ -14,6 +14,13 @@ import java.util.Map;
 public class BookController {
     @Autowired
     private BookService bookService;
+    
+    @RequestMapping(value = "/books/remove", method = RequestMethod.GET)
+    public String bookRemove(Map<String, Object> params) {
+    	final List<BookTo> allBooks = bookService.findAllBooks();
+    	params.put("books", allBooks);
+    	return "bookList";
+    }
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public String bookList(Map<String, Object> params) {
