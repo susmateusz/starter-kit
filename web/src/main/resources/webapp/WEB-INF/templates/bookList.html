@@ -20,10 +20,10 @@
 				<td th:text="${book.id}">id</td>
 				<td th:text="${book.title}">title</td>
 				<td th:text="${book.authors}">authors</td>
-				<td><form th:method="get"
-						th:action="@{/books/remove/__${book.id}__/}">
+				<td><!-- <form th:method="get" th:action="@{/books/remove/__${book.id}__/}">
 						<button type="submit">Remove this book</button>
-					</form></td>
+					</form> -->
+					<a th:href="@{/books/remove/__${book.id}__/}">Remove this book</a></td>
 
 			</tr>
 		</tbody>

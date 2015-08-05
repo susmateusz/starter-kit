@@ -21,10 +21,11 @@
 				<td th:text="${deletedBook.id}">id</td>
 				<td th:text="${deletedBook.title}">title</td>
 				<td th:text="${deletedBook.authors}">authors</td>
-				<td><form th:method="get"
+				<td><!-- <form th:method="get"
 						th:action="@{/books}">
 						<button type="submit">Return to list of books</button>
-					</form></td>
+					</form> -->
+					<a th:href="@{/books}">Return to list of books</a></td>
 
 			</tr>
 		</tbody>
