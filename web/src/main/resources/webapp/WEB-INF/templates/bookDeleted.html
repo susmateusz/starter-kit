@@ -2,12 +2,13 @@
 <html xmlns:th="http://thymeleaf.org">
 <head lang="en">
 <meta charset="UTF-8" />
-<title>Lista książek</title>
+<title>Usunięto książkę</title>
 </head>
 <body>
 
 	<table>
 		<thead>
+		<tr>Following book was removed:</tr>
 			<tr>
 				<td>ID</td>
 				<td>Title</td>
@@ -16,13 +17,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="book : ${books}">
-				<td th:text="${book.id}">id</td>
-				<td th:text="${book.title}">title</td>
-				<td th:text="${book.authors}">authors</td>
+			<tr>
+				<td th:text="${deletedBook.id}">id</td>
+				<td th:text="${deletedBook.title}">title</td>
+				<td th:text="${deletedBook.authors}">authors</td>
 				<td><form th:method="get"
-						th:action="@{/books/remove/__${book.id}__/}">
-						<button type="submit">Remove this book</button>
+						th:action="@{/books}">
+						<button type="submit">Return to list of books</button>
 					</form></td>
 
 			</tr>
