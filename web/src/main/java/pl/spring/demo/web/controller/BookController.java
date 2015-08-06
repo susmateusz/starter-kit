@@ -20,6 +20,7 @@ public class BookController {
     public String bookRemove(Map<String, Object> params,@PathVariable("bookId") long bookId) {
     	final BookTo deletedBook = bookService.deleteBookById(new Long(bookId));
     	params.put("deletedBookTitle", deletedBook.getTitle());
+//    	params.put("deletedBook", deletedBook)
     	return "bookDeleted";
     }
 

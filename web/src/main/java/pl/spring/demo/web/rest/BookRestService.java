@@ -19,9 +19,15 @@ public class BookRestService {
     public List<BookTo> findBooksByTitle(@RequestParam("titlePrefix") String titlePrefix) {
         return bookService.findBooksByTitle(titlePrefix);
     }
-
+    
     @RequestMapping(value = "/book", method = RequestMethod.POST)
     public BookTo saveBook(@RequestBody BookTo book) {
-        return bookService.saveBook(book);
+    	return bookService.saveBook(book);
     }
+    
+    @RequestMapping(value = "/book", method = RequestMethod.DELETE)
+    public BookTo removeBook(@RequestBody BookTo book) {
+    	return bookService.deleteBookById(book.getId());
+    }
+
 }

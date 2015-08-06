@@ -1,5 +1,14 @@
 package pl.spring.demo.web.rest;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.io.File;
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,18 +22,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import net.minidev.json.JSONObject;
 import pl.spring.demo.service.BookService;
 import pl.spring.demo.to.BookTo;
 import pl.spring.demo.web.utils.FileUtils;
-
-import java.io.File;
-import java.util.Arrays;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
@@ -81,5 +83,26 @@ public class BookRestServiceTest {
 				.contentType(MediaType.APPLICATION_JSON).content(json.getBytes()));
 		// then
 		response.andExpect(status().isOk());
+	}
+
+	@Test
+	public void testShouldRemoveBook() throws Exception {
+		// given
+		final BookTo bookTo = new BookTo(4L, "Taniec ze smokami: Część I", "George R. R. Martin");
+		JSONObject obj = new JSONObject();
+		obj.put("id", bookTo.getId());
+		obj.put("title", bookTo.getTitle());
+		obj.put("authors", bookTo.getAuthors());
+		Mockito.when(bookService.deleteBookById(new Long(bookTo.getId()))).thenReturn(bookTo);
+
+		// when
+		ResultActions response = this.mockMvc.perform(delete("/book").accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON).content(obj.toString().getBytes()));
+
+		// then
+		Mockito.verify(bookService).deleteBookById(bookTo.getId());
+		response.andExpect(status().isOk()).andExpect(jsonPath("$.id").value(bookTo.getId().intValue()))
+				.andExpect(jsonPath("$.title").value(bookTo.getTitle()))
+				.andExpect(jsonPath("$.authors").value(bookTo.getAuthors()));
 	}
 }
