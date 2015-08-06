@@ -94,7 +94,6 @@ public class BookRestServiceTest {
 		obj.put("title", bookTo.getTitle());
 		obj.put("authors", bookTo.getAuthors());
 		Mockito.when(bookService.deleteBookById(new Long(bookTo.getId()))).thenReturn(bookTo);
-
 		// when
 		ResultActions response = this.mockMvc.perform(delete("/book").accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON).content(obj.toString().getBytes()));
