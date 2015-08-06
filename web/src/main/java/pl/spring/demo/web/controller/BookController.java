@@ -19,7 +19,7 @@ public class BookController {
     @RequestMapping(value = "/books/remove/{bookId}/")
     public String bookRemove(Map<String, Object> params,@PathVariable("bookId") long bookId) {
     	final BookTo deletedBook = bookService.deleteBookById(new Long(bookId));
-    	params.put("deletedBook", deletedBook);
+    	params.put("deletedBookTitle", deletedBook.getTitle());
     	return "bookDeleted";
     }
 
