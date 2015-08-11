@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="pl.spring.demo.web.rest.BookRestServiceTest" time="0.245" tests="3" errors="0" skipped="0" failures="0">
+<testsuite name="pl.spring.demo.web.rest.BookRestServiceTest" time="0.274" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_51\jre\bin"/>
     <property name="java.vm.version" value="25.51-b03"/>
     <property name="user.country.format" value="DE"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="C:\Users\matsus\Developer\projects\AOtrzonsek-spring-di-aop"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\matsus\eclipse-jee-mars-R-win32-x86_64\eclipse\${workspace_loc:\business-logic}"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -27,7 +27,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 7"/>
-    <property name="classworlds.conf" value="C:\Users\matsus\Developer\workspaces\StarterKitWorkspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf2828663313943819676.tmp"/>
+    <property name="classworlds.conf" value="C:\Users\matsus\Developer\workspaces\StarterKitWorkspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf3596728802445339194.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_51\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jre1.8.0_51/bin/server;C:/Program Files/Java/jre1.8.0_51/bin;C:/Program Files/Java/jre1.8.0_51/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jre7\bin;C:\Program Files (x86)\GitExtensions\;C:\Program Files (x86)\IDM Computer Solutions\UltraEdit;C:\Users\matsus\eclipse-jee-mars-R-win32-x86_64\eclipse;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -62,7 +62,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testShouldRemoveBook" classname="pl.spring.demo.web.rest.BookRestServiceTest" time="0.211"/>
-  <testcase name="testShouldCallBookService" classname="pl.spring.demo.web.rest.BookRestServiceTest" time="0.004"/>
-  <testcase name="testShouldSaveBook" classname="pl.spring.demo.web.rest.BookRestServiceTest" time="0.03"/>
+  <testcase name="testShouldRemoveBook" classname="pl.spring.demo.web.rest.BookRestServiceTest" time="0.229"/>
+  <testcase name="testShouldCallBookService" classname="pl.spring.demo.web.rest.BookRestServiceTest" time="0.021"/>
+  <testcase name="testShouldSaveBook" classname="pl.spring.demo.web.rest.BookRestServiceTest" time="0.024"/>
 </testsuite>
