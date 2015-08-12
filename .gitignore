@@ -13,6 +13,7 @@
 */bin/
 */target/
 */.settings
+.settings
 *.classpath
 *.project
 
