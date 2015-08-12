@@ -23,7 +23,7 @@ public class LibraryEntity {
 	private Long id;
 	@Column(nullable = false, length = 50)
 	private String name;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.REMOVE)
 	@JoinTable(name = "LIBRARY_BOOK", joinColumns = @JoinColumn(name = "library_id") , inverseJoinColumns = @JoinColumn(name = "book_id") )
 	private Set<BookEntity> books = new HashSet<>();
 
