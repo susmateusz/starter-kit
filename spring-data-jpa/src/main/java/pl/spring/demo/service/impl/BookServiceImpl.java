@@ -40,4 +40,9 @@ public class BookServiceImpl implements BookService {
         entity = bookRepository.save(entity);
         return BookMapper.map(entity);
     }
+
+	@Override
+	public List<BookTo> findBookByLibrary_Id(Long id) {
+		return BookMapper.map2To(bookRepository.findBookByLibrary_Id(id));
+	}
 }
