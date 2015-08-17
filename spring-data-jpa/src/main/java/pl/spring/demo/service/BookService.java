@@ -1,11 +1,9 @@
 package pl.spring.demo.service;
 
-import pl.spring.demo.entity.BookEntity;
-import pl.spring.demo.to.BookTo;
-
 import java.util.List;
 
-import org.springframework.data.repository.query.Param;
+import pl.spring.demo.dao.impl.BookSearchCriteria;
+import pl.spring.demo.to.BookTo;
 
 public interface BookService {
 
@@ -13,7 +11,9 @@ public interface BookService {
     List<BookTo> findBooksByTitle(String title);
     List<BookTo> findBooksByAuthor(String author);
 
-    public List<BookTo> findBookByLibrary_Id(Long id);
+    List<BookTo> findBookByLibrary_Id(Long id);
 
     BookTo saveBook(BookTo book);
+    
+    List<BookTo> findBookBySearchCriteria(BookSearchCriteria bookSearchCriteria);
 }
