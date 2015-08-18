@@ -11,6 +11,9 @@ public class BookTo {
 	public BookTo() {
 	}
 
+	public BookTo(Long id, String title, String authors) {
+		this(id,title,authors,"");
+	}
 	public BookTo(Long id, String title, String authors, String libraryName) {
 		this.id = id;
 		this.title = title;
