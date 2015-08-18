@@ -10,7 +10,6 @@ import pl.spring.demo.dao.impl.BookSearchCriteria;
 import pl.spring.demo.entity.BookEntity;
 import pl.spring.demo.mapper.BookMapper;
 import pl.spring.demo.repository.BookRepository;
-import pl.spring.demo.repository.impl.BookRepositoryImpl;
 import pl.spring.demo.service.BookService;
 import pl.spring.demo.to.BookTo;
 
