@@ -24,4 +24,9 @@ public class BookRestService {
     public BookTo saveBook(@RequestBody BookTo book) {
         return bookService.saveBook(book);
     }
+    
+    @RequestMapping(value = "/book", method = RequestMethod.DELETE)
+    public BookTo removeBook(@RequestBody BookTo book) {
+    	return bookService.deleteBookById(book.getId());
+    }
 }

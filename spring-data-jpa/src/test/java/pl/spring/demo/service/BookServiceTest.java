@@ -34,7 +34,7 @@ public class BookServiceTest {
 	public void testShouldFindByTitle() {
 		// given
 		final String title = "trzy";
-		final BookSearchCriteria bookSearchCriteria = new BookSearchCriteria("trzy", null, null);
+		final BookSearchCriteria bookSearchCriteria = new BookSearchCriteria(title, null, null);
 		Predicate<BookTo> ifTitleMatches = s -> s.getTitle().toUpperCase().startsWith(title.toUpperCase());
 		List<BookTo> allBooks = bookService.findAllBooks();
 		// when

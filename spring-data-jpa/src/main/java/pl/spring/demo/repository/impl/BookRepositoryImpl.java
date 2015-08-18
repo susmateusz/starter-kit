@@ -19,7 +19,6 @@ public class BookRepositoryImpl implements BookSearchCriteriaRepository {
 	@PersistenceContext(name = "hsql")
 	private EntityManager entityManager;
 
-	@Override
 	public List<BookEntity> findBookBySearchCriteria(BookSearchCriteria sc) {
 		QBookEntity book = QBookEntity.bookEntity;
 		JPAQuery query = new JPAQuery(entityManager).from(book);

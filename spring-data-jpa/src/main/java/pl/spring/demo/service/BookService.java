@@ -16,4 +16,6 @@ public interface BookService {
     BookTo saveBook(BookTo book);
     
     List<BookTo> findBookBySearchCriteria(BookSearchCriteria bookSearchCriteria);
+    
+	BookTo deleteBookById(Long long1);
 }

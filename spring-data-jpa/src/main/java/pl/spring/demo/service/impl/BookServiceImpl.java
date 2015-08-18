@@ -53,5 +53,13 @@ public class BookServiceImpl implements BookService {
 		return BookMapper.map2To(bookRepository.findBookBySearchCriteria(bookSearchCriteria));
 	}
 
+	@Override
+	@Transactional(readOnly = false)
+	public BookTo deleteBookById(Long bookId) {
+		BookEntity bookEntity = bookRepository.getOne(bookId);
+		bookRepository.delete(bookEntity);
+		return BookMapper.map(bookEntity);
+	}
+
 	
 }
