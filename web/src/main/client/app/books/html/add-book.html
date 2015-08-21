@@ -4,10 +4,15 @@
 <section>
 <div flash-message="5000" ></div>
     <p>TODO dialog umozliwiajacy dodanie i zapisanie nowej ksiazki</p>
-    <input type="text" ng-model="bookTitle">
+   <form name="newBook">
+    <input type="text" ng-model="bookTitle" required>
     <input type="text" ng-model="authorFirstName">
     <input type="text" ng-model="authorLastName">
-    <button ng-click="addBook(bookTitle,authorFirstName,authorLastName)">Dodaj książkę</button>
+    <button ng-click="addBook(bookTitle,authorFirstName,authorLastName)" >Dodaj książkę</button>
+    <div role="alert">
+    	<span class="error" ng-show="newBook.bookTitle.$error.required"></span>
+    </div>
+    </form>
 </section>
 </body>
 </html>
