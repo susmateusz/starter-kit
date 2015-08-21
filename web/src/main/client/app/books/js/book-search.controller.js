@@ -1,9 +1,9 @@
-angular.module('app.books').controller('BookSearchController', function ($scope, $window, $location, bookService, Flash) {
+angular.module('app.books').controller('BookSearchController', function ($scope, $window, $location, bookService, Flash, $modal) {
     'use strict';
 
     $scope.books = [];
     $scope.gridOptions = { data: 'books' };
-    $scope.prefix = undefined;
+    $scope.prefix = '';
 
     var removeBookById = function (bookId) {
         for (var i = 0; i < $scope.books.length; i = i + 1) {
@@ -17,6 +17,8 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
     $scope.search = function () {
         bookService.search($scope.prefix).then(function (response) {
             angular.copy(response.data, $scope.books);
+        }, function () {
+            Flash.create('danger', 'Wyjątek', 'custom-class');
         });
     };
 
@@ -28,7 +30,11 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
     };
 
     $scope.addBook = function () {
-        $location.url('/books/add-book');
+        $modal.open({
+            templateUrl: 'books/html/book-modal.html',
+            controller: 'BookModalController',
+            size: 'lg'
+        });
     };
 
 });

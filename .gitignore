@@ -10,8 +10,10 @@ java/target
 .project
 .sonar
 *.bak
+/target/
 *.jar
 */target/*
 */bin/*
 *.jar
 *.lst
+
