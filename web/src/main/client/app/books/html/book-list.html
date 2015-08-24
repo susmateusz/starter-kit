@@ -5,21 +5,30 @@
 		<div flash-message="5000"></div>
 
 		<p>Podaj tytuł książki:</p>
-		<input type="text" ng-model="prefix">
-		<button ng-click="search()">Szukaj</button>
-		<button ng-click="addBook()">Dodaj książkę</button>
-
-		<table class="table table-striped">
+		<input type="text" ng-model="prefix.title">
+		<button class="btn btn-primary" ng-click="search()">Szukaj</button>
+		<button class="btn btn-primary" ng-click="addBook()">Dodaj
+			książkę</button>
+		<table class="table table-striped v-margin">
 			<tr>
-				<th>Tytuł</th>
-				<th>Autorzy</th>
-				<th>Usuń</th>
+				<th class="col-md-5">Title</th>
+				<th class="col-md-5">Author</th>
+				<th class="col-md-1">Edit</th>
+				<th class="col-md-1">Delete</th>
 			</tr>
-			<tr ng-repeat="book in books">
+			<tr class="info" ng-if="books.length==0">
+				<td colspan="4" align="center"><h5>Empty List</h5></td>
+			</tr>
+			<tr ng-repeat="book in books | filter:prefix:startsWith">
 				<td>{{ book.title }}</td>
-				<td>{{ book.authors }}</td>
+				<td><span ng-repeat="author in book.authors">{{author.firstName}}
+						{{author.lastName}}<span ng-if="!$last">, </span>
+				</span></td>
 				<td>
-					<button ng-click="deleteBook(book.id)">Usuń</button>
+					<button class="btn btn-primary" ng-click="editBook(book)">Edit</button>
+				</td>
+				<td>
+					<button class="btn btn-primary" ng-click="deleteBook(book.id)">Delete</button>
 				</td>
 			</tr>
 		</table>
