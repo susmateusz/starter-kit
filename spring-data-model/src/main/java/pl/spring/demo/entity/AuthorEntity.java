@@ -27,7 +27,6 @@ public class AuthorEntity {
 	}
 
 	public AuthorEntity(String firstName, String lastName) {
-		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
