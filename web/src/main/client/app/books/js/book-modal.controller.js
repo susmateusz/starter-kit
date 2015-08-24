@@ -1,30 +1,25 @@
 angular.module('app.books').controller(
 		'BookModalController',
-		function($scope, $modal, Flash) {
+		function($scope, $modal, $window, $location, bookService,book,header) {
 			'use strict';
 
-			$scope.bookTitle = '';
-			$scope.authors = [];
+			$scope.header = header;
+			$scope.book = book;
 			$scope.index = 0;
 			$scope.firstName = '';
 			$scope.lastName = '';
 			$scope.gridOptions = {
-				data : 'authors'
+				data : 'book'
 			};
 
 			$scope.addBook = function() {
-				$close();
-				var book ={title : $scope.bookTitle, authors : $scope.authors};
-				bookService.addBook($book).then(function(){
-					Flash.create('success', 'Książka '+$book+' została dodana!', 'custom-class');
-				}, function(){
-					Flash.create('danger', 'Wystapił problem  podczas dodawania książki!', 'custom-class');
-				});
+				bookService.addBook($scope.book);
 			};
 
 			$scope.addAuthor = function(authorFirstName, authorLastName) {
-				$scope.index = $scope.authors.length;
-				$scope.authors[$scope.index] = {
+				$scope.index = $scope.book.authors.length;
+				$scope.book.authors[$scope.index] = {
+					id: 'null',
 					firstName : authorFirstName,
 					lastName : authorLastName
 				};
@@ -33,6 +28,6 @@ angular.module('app.books').controller(
 			};
 
 			$scope.deleteAuthor = function(authorIndex) {
-				$scope.authors.splice(authorIndex, 1);
+				$scope.book.authors.splice(authorIndex, 1);
 			};
 		});
