@@ -7,6 +7,7 @@ global.isProd = function () {
 };
 require('require-dir')('./gulp', {recurse: true});
 
+//default task
 gulp.task('default', ['clean'], function () {
     gulp.start('build:dist');
 });
