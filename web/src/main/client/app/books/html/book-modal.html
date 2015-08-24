@@ -1,39 +1,48 @@
 <div>
 	<form novalidate>
 		<div class="modal-header">
-			<h3 class="modal-title">Inserting new book</h3>
+			<h3 class="modal-title">{{header}}</h3>
 		</div>
 		<div class="modal-body">
 			<p>
-				Insert book title: <input type="text" ng-model="bookTitle"
+				Book title: <input type="text" ng-model="book.title"
 					placeholder="Insert title" /> <span style="color: red"
-					ng-show="!(!!bookTitle)">Book title is required.</span>
+					ng-show="!(!!book.title)">Book title is required.</span>
 			</p>
 			<table class="table table-striped">
 				<tr>
+					<th ng-if="book.id==null">ID</th>
 					<th>First name</th>
 					<th>Last name</th>
 					<th>Delete</th>
 				</tr>
-				<tr ng-repeat="author in authors">
+				<tr ng-repeat="author in book.authors">
+					<td ng-if="book.id==null">{{ author.id }}</td>
 					<td>{{ author.firstName }}</td>
 					<td>{{ author.lastName }}</td>
 					<td>
-						<button class="btn btn-primary" ng-click="deleteAuthor($index)">Delete author no. {{$index+1}}</button>
+						<button class="btn btn-primary" ng-click="deleteAuthor($index)">Delete
+							author no. {{$index+1}}</button>
 					</td>
 				</tr>
 				<tr>
-					<td><input type="text" ng-model="firstName" placeholder="First name"></td>
-					<td><input type="text" ng-model="lastName" placeholder="Last name"></td>
-					<td><button class="btn btn-primary" ng-disabled="!(!!firstName) || !(!!lastName)"
-				ng-click="addAuthor(firstName,lastName)">Add author no. {{authors.length+1}}</button></td>
+					<td ng-if="book.id==null"></td>
+					<td><input type="text" ng-model="firstName"
+						placeholder="First name"></td>
+					<td><input type="text" ng-model="lastName"
+						placeholder="Last name"></td>
+					<td><button class="btn btn-primary"
+							ng-disabled="!(!!firstName) || !(!!lastName)"
+							ng-click="addAuthor(firstName,lastName)">Add author no.
+							{{book.authors.length+1}}</button></td>
 				</tr>
 			</table>
 		</div>
 		<div class="modal-footer">
 			<div flash-message="5000"></div>
-			<button class="btn btn-primary" ng-disabled="!(!!bookTitle) || authors.length < 1"
-				ng-click="addBook()">Add book</button>
+			<button class="btn btn-primary"
+				ng-disabled="!(!!book.title) || book.authors.length < 1"
+				ng-click="addBook();$close(book)">Add book</button>
 			<button class="btn btn-warning" ng-click="$dismiss()">Close</button>
 		</div>
 	</form>
