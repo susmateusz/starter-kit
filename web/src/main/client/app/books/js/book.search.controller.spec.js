@@ -18,6 +18,11 @@ describe('book controller', function () {
         // then
         expect($scope.search).toBeDefined();
     }));
+    
+    it('search should call bookService.search',inject(function($controller, $q, bookService, Flash) {
+    	// given
+    	$controller('BookSearchController',{$scope: $scope});
+    }));
 
     it('delete book should call bookService.deleteBook', inject(function ($controller, $q, bookService, Flash) {
         // given
@@ -34,7 +39,7 @@ describe('book controller', function () {
         $scope.$digest();
         // then
         expect(bookService.deleteBook).toHaveBeenCalledWith(bookId);
-        expect(Flash.create).toHaveBeenCalledWith('success', 'Książka została usunięta.', 'custom-class');
+        expect(Flash.create).toHaveBeenCalledWith('success', 'Książka została usunięta!', 'custom-class');
         expect($scope.books.length).toBe(0);
     }));
 });
