@@ -9,7 +9,8 @@
         "main",
         "books",
         "component-1",
-        "component-2"
+        "component-2",
+        "authors"
     ],
     "appBuild": true,
     "proxy": "http://localhost:9721",
