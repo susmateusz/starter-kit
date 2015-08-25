@@ -1,14 +1,16 @@
 <div>
-	<form novalidate>
+	<form name="sample" novalidate>
 		<div class="modal-header">
 			<h3 class="modal-title">{{header}}</h3>
 		</div>
 		<div class="modal-body">
 			<p>
-				Book title: <input type="text" ng-model="book.title"
-					placeholder="Insert title" /> <span style="color: red"
-					ng-show="!(!!book.title)">Book title is required.</span>
+				Book title: <input type="text" name="bookTitle"
+					ng-model="book.title" placeholder="Insert title" ng-required="true" />
 			</p>
+			<div class="alert alert-warning" ng-show="sample.bookTitle.$invalid && sample.$submitted">
+				<strong>Warning!</strong> Book title is required.
+			</div>
 			<table class="table table-striped">
 				<tr>
 					<th ng-if="book.id==null">ID</th>
@@ -28,21 +30,24 @@
 				<tr>
 					<td ng-if="book.id==null"></td>
 					<td><input type="text" ng-model="firstName"
-						placeholder="First name"></td>
+						placeholder="First name" ng-required="book.authors.length == 0"></td>
 					<td><input type="text" ng-model="lastName"
-						placeholder="Last name"></td>
+						placeholder="Last name" ng-required="book.authors.length == 0"></td>
 					<td><button class="btn btn-primary"
 							ng-disabled="!(!!firstName) || !(!!lastName)"
 							ng-click="addAuthor(firstName,lastName)">Add author no.
 							{{book.authors.length+1}}</button></td>
 				</tr>
 			</table>
+			<div ng-show="book.authors.length == 0 && sample.$submitted"
+				class="alert alert-warning">
+				<strong>Warning!</strong> Book required at least one author.
+			</div>
 		</div>
 		<div class="modal-footer">
 			<div flash-message="5000"></div>
-			<button class="btn btn-primary"
-				ng-disabled="!(!!book.title) || book.authors.length < 1"
-				ng-click="addBook();$close(book)">Add book</button>
+			<button class="btn btn-primary" type="submit" ng-click="addBook()">Add
+				book</button>
 			<button class="btn btn-warning" ng-click="$dismiss()">Close</button>
 		</div>
 	</form>

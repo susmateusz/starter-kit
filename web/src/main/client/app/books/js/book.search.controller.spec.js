@@ -98,12 +98,14 @@ describe('book controller', function() {
 		expect($scope.books.length).toBe(0);
 	}));
 
-	it('add book should open book-modal', inject(function($controller) {
-		// given
-		$controller('BookSearchController', {
-			$scope : $scope
-		});
+	it('add book should open book-modal', inject(function() {
+		// TODO
 
+	}));
+	
+	it('add book should open edit-modal', inject(function() {
+		// TODO
+		
 	}));
 
 	it('filter should detect right title', inject(function($controller) {
