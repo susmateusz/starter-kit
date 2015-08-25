@@ -4,7 +4,6 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
     $scope.books = [];
     $scope.gridOptions = { data: 'books' };
     $scope.prefix = {title:''};
-    $scope.titleWidth="col-md-3";
 
     var removeBookById = function (bookId) {
         for (var i = 0; i < $scope.books.length; i = i + 1) {
@@ -14,18 +13,18 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
             }
         }
     };
+    
+    $scope.startsWith = function(title,prefix) {
+    	return title.substr(0,prefix.length).toLowerCase() === prefix.toLowerCase();
+    };
 
     $scope.search = function () {
-        bookService.search().then(function (response) {
+        bookService.search($scope.prefix.title).then(function (response) {
             angular.copy(response.data, $scope.books);
         }, function () {
             Flash.create('danger', 'Wyjątek', 'custom-class');
         });
     };
-    
-    $scope.startsWith = function(title,prefix) {
-    	return title.substr(0,prefix.length).toLowerCase() == prefix.toLowerCase();
-    }
 
     $scope.deleteBook = function (bookId) {
         bookService.deleteBook(bookId).then(function () {
