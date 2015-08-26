@@ -34,7 +34,7 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
     };
 
     $scope.addBook = function () {
-        var modalInstance = $modal.open({
+        $modal.open({
             templateUrl: 'books/html/book-modal.html',
             controller: 'BookModalController',
             size: 'lg',
@@ -46,8 +46,7 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
             		return {id:'null',title:'',authors:[]};
             	}
             }
-        });
-        modalInstance.result.then(function(response){
+        }).result.then(function(response){
         	Flash.create('success', 'Książka "'+response.title+'" została dodana!', 'custom-class');
         	$scope.books.push(response);
         });
