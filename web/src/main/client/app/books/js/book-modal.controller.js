@@ -14,13 +14,14 @@ angular.module('app.books').controller(
 
 			$scope.addBook = function() {
 				if ($scope.book.title !== '' && $scope.book.authors.length > 0) {
-					bookService.addBook($scope.book);
-					$scope.$close(book);
+					bookService.addBook($scope.book).then(function(){
+						$scope.$close(book);
+						
+					});
 				}
 			};
 
 			$scope.addAuthor = function(authorFirstName, authorLastName) {
-				$scope.index = $scope.book.authors.length;
 				$scope.book.authors.push({
 					id : 'null',
 					firstName : authorFirstName,
