@@ -4,8 +4,24 @@
 	<section>
 		<div flash-message="5000"></div>
 
-		LISTA
-		<input type="text" ng-model="title">
+		<p>Podaj imię lub nazwisko autora:</p>
+		<input type="text" placeholder="Insert name" ng-model="prefix">
+		<button class="btn btn-primary" ng-click="findAll()">Szukaj</button>
+		<table class="table table-striped v-margin">
+			<tr>
+				<th class="col-md-2">ID</th>
+				<th class="col-md-5">First Name</th>
+				<th class="col-md-5">Last Name</th>
+			</tr>
+			<tr class="info" ng-if="authors.length==0">
+				<td colspan="4" align="center"><h5>Empty List</h5></td>
+			</tr>
+			<tr ng-repeat="author in authors">
+				<td>{{ author.id }}</td>
+				<td>{{author.firstName}}</td>
+				<td>{{author.lastName}}</td>
+			</tr>
+		</table>
 	</section>
 </body>
 </html>
