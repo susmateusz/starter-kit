@@ -1,8 +1,8 @@
 package pl.spring.demo.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,13 +33,13 @@ public class BookEntity implements Serializable {
 	@JoinTable(name = "BOOK_AUTHOR", joinColumns = {
 			@JoinColumn(name = "BOOK_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "AUTHOR_ID", nullable = false, updatable = false) })
-	private Set<AuthorEntity> authors = new HashSet<>();
+	private List<AuthorEntity> authors = new ArrayList<>();
 
 	// for hibernate
 	protected BookEntity() {
 	}
 
-	public BookEntity(Long id, String title, Set<AuthorEntity> authors) {
+	public BookEntity(Long id, String title, List<AuthorEntity> authors) {
 		this.id = id;
 		this.title = title;
 		this.authors = authors;
@@ -61,11 +61,11 @@ public class BookEntity implements Serializable {
 		this.title = title;
 	}
 
-	public Set<AuthorEntity> getAuthors() {
+	public List<AuthorEntity> getAuthors() {
 		return authors;
 	}
 
-	public void setAuthors(Set<AuthorEntity> authors) {
+	public void setAuthors(List<AuthorEntity> authors) {
 		this.authors = authors;
 	}
 

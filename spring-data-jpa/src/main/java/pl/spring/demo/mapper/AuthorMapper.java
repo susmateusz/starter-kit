@@ -7,9 +7,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import pl.spring.demo.entity.AuthorEntity;
-import pl.spring.demo.entity.BookEntity;
 import pl.spring.demo.to.AuthorTo;
-import pl.spring.demo.to.BookTo;
 
 public class AuthorMapper {
 
@@ -37,12 +35,12 @@ public class AuthorMapper {
         return null;
     }
 	
-	public static Set<AuthorEntity> map2Entity(Set<AuthorTo> authorsTo) {
-		return authorsTo.stream().map(AuthorMapper::map).collect(Collectors.toSet());
+	public static List<AuthorEntity> map2Entity(List<AuthorTo> authorsTo) {
+		return authorsTo.stream().map(AuthorMapper::map).collect(Collectors.toList());
 	}
 	
-	public static Set<AuthorTo> map2To(Set<AuthorEntity> authorsEntity) {
-		return authorsEntity.stream().map(AuthorMapper::map).collect(Collectors.toSet());
+	public static List<AuthorTo> map2To(List<AuthorEntity> authorsEntity) {
+		return authorsEntity.stream().map(AuthorMapper::map).collect(Collectors.toList());
 	}
 
 }
