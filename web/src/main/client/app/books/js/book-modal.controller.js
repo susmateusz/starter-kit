@@ -3,7 +3,7 @@ angular.module('app.books').controller(
 		function($scope, $modalInstance,
 				bookService, book, header) {
 			'use strict';
-
+			
 			$scope.header = header;
 			$scope.book = book;
 			$scope.firstName = '';
@@ -16,7 +16,6 @@ angular.module('app.books').controller(
 				if ($scope.book.title !== '' && $scope.book.authors.length > 0) {
 					bookService.addBook($scope.book).then(function(){
 						$scope.$close(book);
-						
 					});
 				}
 			};
