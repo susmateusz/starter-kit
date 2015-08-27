@@ -1,4 +1,4 @@
-describe('book  search service', function() {
+describe('book search service', function() {
 	'use strict';
 
 	beforeEach(function() {
@@ -16,7 +16,7 @@ describe('book  search service', function() {
 		expect(bookService.search).toBeDefined();
 	}));
 
-	it('search book should call bookService.search', inject(function(
+	it('search book should call bookRestService.search', inject(function(
 			bookService, bookRestService) {
 		// given
 		var prefix = '';
@@ -32,7 +32,7 @@ describe('book  search service', function() {
 		expect(bookService.deleteBook).toBeDefined();
 	}));
 
-	it('deleteBook should call bookService.deleteBook', inject(function(
+	it('deleteBook should call bookRestService.deleteBook', inject(function(
 			bookService, bookRestService) {
 		// given
 		var bookId = 3;
@@ -48,7 +48,7 @@ describe('book  search service', function() {
 		expect(bookService.addBook).toBeDefined();
 	}));
 
-	it('addBook should call bookService.addBook', inject(function(bookService,
+	it('addBook should call bookRestService.addBook', inject(function(bookService,
 			bookRestService) {
 		// given
 		var book = {

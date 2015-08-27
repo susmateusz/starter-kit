@@ -1,5 +1,4 @@
-angular.module('app.books').controller(
-		'BookSearchController',
+angular.module('app.books').controller('BookSearchController',
 		function($scope, $window, $location, bookService, Flash, $modal) {
 			'use strict';
 
@@ -21,28 +20,24 @@ angular.module('app.books').controller(
 			};
 
 			$scope.startsWith = function(title, prefix) {
-				return title.substr(0, prefix.length).toLowerCase() === prefix
-						.toLowerCase();
+				return title.substr(0, prefix.length).toLowerCase() === prefix.toLowerCase();
 			};
 
 			$scope.search = function() {
-				bookService.search($scope.prefix.title).then(
-						function(response) {
-							angular.copy(response.data, $scope.books);
-						}, function() {
-							Flash.create('danger', 'Wyjątek', 'custom-class');
-						});
+				bookService.search($scope.prefix.title).then(function(response) {
+					angular.copy(response.data, $scope.books);
+				}, function() {
+					Flash.create('danger', 'Wyjątek', 'custom-class');
+				});
 			};
 
 			$scope.deleteBook = function(bookId) {
-				bookService.deleteBook(bookId).then(
-						function() {
-							removeBookById(bookId);
-							Flash
-									.create('success',
-											'Książka została usunięta!',
-											'custom-class');
-						});
+				bookService.deleteBook(bookId).then(function() {
+					removeBookById(bookId);
+					Flash.create('success', 'Książka została usunięta!', 'custom-class');
+				},function() {
+					Flash.create('danger', 'Książka nie została usunięta!', 'custom-class');
+				});
 			};
 
 			$scope.addBook = function() {
@@ -65,6 +60,8 @@ angular.module('app.books').controller(
 				}).result.then(function(response) {
 					Flash.create('success', 'Książka "' + response.title + '" została dodana!', 'custom-class');
 					$scope.books.push(response);
+				},function() {
+					Flash.create('danger', 'Książka nie została dodana!', 'custom-class');
 				});
 			};
 
@@ -84,6 +81,8 @@ angular.module('app.books').controller(
 				}).result.then(function(response) {
 					Flash.create('success', 'Książka "' + response.title + '" została edytowana!', 'custom-class');
 					$scope.books.push(response);
+				},function() {
+					Flash.create('danger', 'Książka nie została edytowana!', 'custom-class');
 				});
 			};
 
