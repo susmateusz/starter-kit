@@ -55,4 +55,38 @@ describe('book controller', function() {
 		expect(Flash.create).toHaveBeenCalledWith('danger', 'Failed to load authors.', 'custom-class');
 	}));
 
+	it('filter startsWith', inject(function() {
+		// then
+		expect($scope.anyNameStartsWith).toBeDefined();
+	}));
+	
+	it('anyNameStartsWith filters by firstName', inject(function() {
+		//given
+		$scope.prefix.name = 'jan';
+		var author = {id:1,'firstName':'janusz','lastName':'kowalski'};
+		//when
+		var result = $scope.anyNameStartsWith(author);
+		// then
+		expect(result).toBe(true);
+	}));
+	
+	it('anyNameStartsWith filters by lastName', inject(function() {
+		//given
+		$scope.prefix.name = 'kow';
+		var author = {id:1,'firstName':'janusz','lastName':'kowalski'};
+		//when
+		var result = $scope.anyNameStartsWith(author);
+		// then
+		expect(result).toBe(true);
+	}));
+	
+	it('anyNameStartsWith filters by wrong name prefix', inject(function() {
+		//given
+		$scope.prefix.name = 'walski';
+		var author = {id:1,'firstName':'janusz','lastName':'kowalski'};
+		//when
+		var result = $scope.anyNameStartsWith(author);
+		// then
+		expect(result).toBe(false);
+	}));
 });
