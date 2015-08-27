@@ -6,9 +6,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,7 +53,7 @@ public class BookRestServiceTest {
         final String bookTitle = "testTitle";
         final AuthorTo authorTo1 = new AuthorTo(1L, "name1", "last name 1");
         final AuthorTo authorTo2 = new AuthorTo(1L, "name2", "last name 2");
-        Set<AuthorTo> authors = new HashSet<AuthorTo>();
+        List<AuthorTo> authors = new ArrayList<AuthorTo>();
         authors.add(authorTo1);
         authors.add(authorTo2);
         final BookTo bookTo1 = new BookTo(1L, bookTitle, authors);
